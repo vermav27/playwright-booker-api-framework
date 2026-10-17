@@ -2,6 +2,19 @@
 
 A lightweight API testing framework built with Playwright, TypeScript, Faker, and Zod. It tests the public [Restful Booker API](https://restful-booker.herokuapp.com/) without launching a browser.
 
+## Tech Stack and Libraries
+
+| Technology | Purpose |
+|---|---|
+| Node.js | JavaScript runtime used to execute the framework. |
+| TypeScript | Adds static typing to tests, utilities, and configuration. |
+| Playwright Test | Runs API tests and provides the `request` fixture and assertions. |
+| Faker | Generates dynamic booking names, prices, dates, and other test data. |
+| Zod | Validates API response structures and provides inferred TypeScript types. |
+| dotenv | Loads `BASE_URL` and authentication credentials from `.env`. |
+| Custom HTML Reporter | Produces console results and HTML reports after test execution. |
+| npm | Installs dependencies and runs framework commands. |
+
 ## Requirements
 
 - Node.js 20.19 or newer

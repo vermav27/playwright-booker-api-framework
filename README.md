@@ -220,6 +220,34 @@ npm test
 
 The command stops if any step fails. Push the code only after the complete check passes.
 
+## Optional Local Jenkins Service
+
+Jenkins is not required to run the framework locally. If `jenkins-lts` is installed with Homebrew on macOS, it can be managed on port `8080` with these commands:
+
+Start Jenkins:
+
+```bash
+brew services start jenkins-lts
+```
+
+Open Jenkins:
+
+```text
+http://localhost:8080
+```
+
+Stop Jenkins and release port `8080`:
+
+```bash
+brew services stop jenkins-lts
+```
+
+Check whether anything is still listening on the port:
+
+```bash
+lsof -nP -iTCP:8080 -sTCP:LISTEN
+```
+
 ## Custom Report
 
 `playwright.config.ts` registers `utils/CustomReporter.ts` as the active reporter. Every test run creates:

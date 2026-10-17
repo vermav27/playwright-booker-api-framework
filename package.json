@@ -1,0 +1,24 @@
+{
+  "name": "playwright-booker-api-framework",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Lightweight Playwright TypeScript API test framework for Restful Booker",
+  "scripts": {
+    "test": "playwright test",
+    "test:create": "playwright test tests/booking.create.spec.ts",
+    "test:update": "playwright test tests/booking.patch.spec.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^10.6.0",
+    "@playwright/test": "^1.55.0",
+    "@types/node": "^22.0.0",
+    "dotenv": "^17.0.0",
+    "typescript": "^5.9.0",
+    "zod": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=20.19.0"
+  }
+}

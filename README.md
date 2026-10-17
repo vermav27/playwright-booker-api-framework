@@ -1,4 +1,4 @@
-# Playwright Booker API Framework
+# Playwright Booker API Frameworks
 
 A lightweight API testing framework built with Playwright, TypeScript, Faker, Zod, and ESLint. It tests the public [Restful Booker API](https://restful-booker.herokuapp.com/) without launching a browser.
 

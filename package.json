@@ -8,14 +8,19 @@
     "test": "playwright test",
     "test:create": "playwright test tests/booking.create.spec.ts",
     "test:update": "playwright test tests/booking.patch.spec.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "check": "npm run lint && npm run typecheck && npm test"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@faker-js/faker": "^10.6.0",
     "@playwright/test": "^1.55.0",
     "@types/node": "^22.0.0",
     "dotenv": "^17.0.0",
+    "eslint": "^10.13.0",
     "typescript": "^5.9.0",
+    "typescript-eslint": "^8.71.2",
     "zod": "^4.0.0"
   },
   "engines": {

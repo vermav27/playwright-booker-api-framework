@@ -9,7 +9,6 @@
 
 import {
     FullConfig,
-    FullResult,
     Reporter,
     Suite,
     TestCase,
@@ -204,8 +203,8 @@ class CustomReporter implements Reporter {
     onTestEnd(test: TestCase, result: TestResult): void {
         this.suiteStats.total++;
 
-        let status: 'passed' | 'failed' | 'skipped' | 'timedOut' = 'passed';
-        let statusIcon = '✅';
+        let status: 'passed' | 'failed' | 'skipped' | 'timedOut';
+        let statusIcon: string;
         if (result.status === 'passed') {
             this.suiteStats.passed++;
             status = 'passed';
@@ -412,7 +411,7 @@ class CustomReporter implements Reporter {
         return html;
     }
 
-    async onEnd(_result: FullResult): Promise<void> {
+    async onEnd(): Promise<void> {
         this.endTime = new Date();
         const duration = this.formatDuration(this.endTime.getTime() - this.startTime.getTime());
         const passRate = this.suiteStats.total > 0

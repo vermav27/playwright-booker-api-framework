@@ -1,6 +1,6 @@
 # Playwright Booker API Framework
 
-A lightweight API testing framework built with Playwright, TypeScript, Faker, and Zod. It tests the public [Restful Booker API](https://restful-booker.herokuapp.com/) without launching a browser.
+A lightweight API testing framework built with Playwright, TypeScript, Faker, Zod, and ESLint. It tests the public [Restful Booker API](https://restful-booker.herokuapp.com/) without launching a browser.
 
 ## Tech Stack and Libraries
 
@@ -12,6 +12,7 @@ A lightweight API testing framework built with Playwright, TypeScript, Faker, an
 | Faker | Generates dynamic booking names, prices, dates, and other test data. |
 | Zod | Validates API response structures and provides inferred TypeScript types. |
 | dotenv | Loads `BASE_URL` and authentication credentials from `.env`. |
+| ESLint | Checks TypeScript code for common mistakes and unsafe patterns. |
 | Custom HTML Reporter | Produces console results and HTML reports after test execution. |
 | npm | Installs dependencies and runs framework commands. |
 
@@ -35,13 +36,13 @@ A lightweight API testing framework built with Playwright, TypeScript, Faker, an
    cp .env.example .env
    ```
 
-3. Run all tests:
+3. Verify the complete framework:
 
    ```bash
-   npm test
+   npm run check
    ```
 
-The project uses Playwright's API request fixture, so Playwright browsers do not need to be installed.
+`npm run check` runs ESLint, TypeScript validation, and all API tests. The project uses Playwright's API request fixture, so Playwright browsers do not need to be installed.
 
 ## Environment Variables
 
@@ -73,6 +74,7 @@ playwright-booker-api-framework/
 │   ├── dataGenerator.ts          Faker booking-data generator
 │   └── tokenManager.ts           Authentication token request
 ├── .env.example                  Environment variable template
+├── eslint.config.js              ESLint flat configuration
 ├── playwright.config.ts          Playwright and reporter configuration
 ├── tsconfig.json                 TypeScript configuration
 └── package.json                  Dependencies and test commands
@@ -104,6 +106,7 @@ Each layer has one responsibility:
 | `utils/tokenManager.ts` | Reads credentials from `.env`, requests a token, and returns it. |
 | `tests` | Builds URLs, adds headers, sends requests, and performs assertions. |
 | `CustomReporter.ts` | Prints execution results and generates the HTML report. |
+| `eslint.config.js` | Applies the recommended JavaScript and TypeScript lint rules. |
 
 ## How Tests Work
 
@@ -166,7 +169,7 @@ const responseBody = createBookingResponseSchema.parse(
 
 If the response shape or field types do not match the schema, the test fails with a validation error.
 
-## Test Commands
+## Framework Commands
 
 | Command | Purpose |
 |---|---|
@@ -174,12 +177,48 @@ If the response shape or field types do not match the schema, the test fails wit
 | `npm run test:create` | Run only the create-booking test. |
 | `npm run test:update` | Run only the update-booking test. |
 | `npm run typecheck` | Check the TypeScript code without running tests. |
+| `npm run lint` | Run ESLint across the framework. |
+| `npm run check` | Run linting, type checking, and all tests before pushing code. |
 
 You can also run an individual test by title:
 
 ```bash
 npx playwright test -g "create a booking"
 ```
+
+## Code Quality
+
+ESLint uses the flat configuration in `eslint.config.js`. It checks the framework source while ignoring generated content in `node_modules/`, `custom-report/`, and `test-results/`.
+
+Run linting by itself with:
+
+```bash
+npm run lint
+```
+
+The complete quality gate is:
+
+```text
+ESLint → TypeScript check → Playwright tests → Custom HTML report
+```
+
+## Before Pushing to GitHub
+
+Always run the complete verification command:
+
+```bash
+npm run check
+```
+
+This command runs:
+
+```text
+npm run lint
+npm run typecheck
+npm test
+```
+
+The command stops if any step fails. Push the code only after the complete check passes.
 
 ## Custom Report
 

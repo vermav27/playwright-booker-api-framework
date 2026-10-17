@@ -3,5 +3,9 @@ import { defineConfig } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests',
-  reporter: [['./utils/CustomReporter.ts']],
+
+  reporter: [
+    ['./utils/CustomReporter.ts'],
+    ['junit', { outputFile: 'test-results/junit.xml' }],
+  ]
 });

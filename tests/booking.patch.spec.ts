@@ -31,7 +31,7 @@ test('update a booking', async ({ request }) => {
     },
   );
 
-  expect(updateResponse.status()).toBe(200);
+  expect(updateResponse.status()).toBe(201);
 
   const updatedBooking = bookingSchema.parse(await updateResponse.json());
   expect(updatedBooking.firstname).toBe('James');
